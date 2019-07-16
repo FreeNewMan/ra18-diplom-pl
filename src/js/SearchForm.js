@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React  from 'react';
 
 const SearchForm = (props) => (
    <form className={`header-main__search ${props.active}`} action="#"  >

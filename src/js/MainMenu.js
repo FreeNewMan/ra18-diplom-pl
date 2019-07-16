@@ -1,30 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-
-
-
-//Выпадающее меню главного меню (пока с общим списком для всех пунктов)
-function mainSubmenuVisibility() {
-    console.log(this.className);
-    if (this.className.split(' ')[this.className.split(' ').length-1] === ('main-menu__item_active')) {
-        document.querySelector('.dropped-menu').classList.remove('dropped-menu_visible')
-        this.classList.remove('main-menu__item_active');
-    } else {
-        if (document.querySelector('.main-menu__item_active')) {
-            document.querySelector('.main-menu__item_active').classList.toggle('main-menu__item_active');
-        }
-        document.querySelector('.dropped-menu').classList.add('dropped-menu_visible');
-        this.classList.toggle('main-menu__item_active');
-    }
-
-}
-
-let mainMenuItems = document.querySelectorAll('.main-menu__item');
-
-for (let item of mainMenuItems) {
-    item.onclick = mainSubmenuVisibility;
-}
-
 
 
 const menuItems = [
@@ -65,7 +40,7 @@ class MainMenu extends React.Component {
       <nav className="main-menu">
         <div className="wrapper">
           <ul className="main-menu__items">
-            {menuItems.map((item) => <MenuItem key={item.code} item={item} updateActive={this.updateActive} active={item.code == this.state.active ? 'main-menu__item_active' : '' }/>)}
+            {menuItems.map((item) => <MenuItem key={item.code} item={item} updateActive={this.updateActive} active={item.code === this.state.active ? 'main-menu__item_active' : '' }/>)}
           </ul>
         </div>
       </nav>

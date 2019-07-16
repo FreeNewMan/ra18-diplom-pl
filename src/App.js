@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link, NavLink, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import TopMenu from './js/TopMenu.js';
 import Header from './js/Header.js';
-import HeaderMain from './js/HeaderMain.js';
 import HiddenPanel from './js/HiddenPanel.js';
 import Phone from './js/Phone.js';
 import Logo from './js/Logo.js';

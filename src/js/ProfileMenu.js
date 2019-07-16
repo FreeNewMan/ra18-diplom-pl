@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React from 'react';
 
 const ProfileMenu = (props) => (
   <div className="header-main__pic header-main__pic_profile" onClick={() => {props.updateVisibleProfile()}}>
