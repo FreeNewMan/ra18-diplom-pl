@@ -35,7 +35,7 @@ class SliderHome extends React.Component {
         if (progress > V) {
             start = null;
             for (var i = 0; i < img.length; i++) {
-                img[i].style.zIndex = "0";
+                img[i].style.zIndex = "0"; 
                 button[i].style.opacity = "0.5";
             }
             img[iii].style.zIndex = "1";

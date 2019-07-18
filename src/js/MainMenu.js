@@ -27,16 +27,19 @@ class MainMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: this.props.active 
+      active: this.props.active, 
+      activeDropped: false
     }
   }
 
  updateActive = (value) => {
-   this.setState({ active: value })
+   this.setState({ active: value, activeDropped: true})
+
  }
 
   render() {
     return (
+      <div>
       <nav className="main-menu">
         <div className="wrapper">
           <ul className="main-menu__items">
@@ -44,136 +47,102 @@ class MainMenu extends React.Component {
           </ul>
         </div>
       </nav>
+      <DroppedMenu active={this.state.activeDropped ? 'dropped-menu_visible' : '' } />
+      </div>
     );
   }
 }
  
 
+function SubItem(props) {
+   return (
+      <li className='dropped-menu__item' >
+         <Link to="/catalogue">{props.item.title}</Link>
+      </li>
+    );
+}
+
+
 class DroppedMenu extends React.Component {
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      occasionList : [
+        {id: '1' , url: '/', title: 'Офис' },
+        {id: '2' , url: '/', title: 'Вечеринка' },
+        {id: '3' , url: '/', title: 'Свадьба' },
+        {id: '4' , url: '/', title: 'Спорт' },
+        {id: '5' , url: '/', title: 'Море' },
+        {id: '6' , url: '/', title: 'Дом' },
+        {id: '7' , url: '/', title: 'Повседневное' }
+      ],
+
+      subCatList : [
+        {id: '1' , url: '/', title: 'Балетки' },
+        {id: '2' , url: '/', title: 'Босоножки' },
+        {id: '3' , url: '/', title: 'Ботильоны' },
+        {id: '4' , url: '/', title: 'Ботинки' },
+        {id: '5' , url: '/', title: 'Ботфорты' },
+        {id: '6' , url: '/', title: 'Галоши' },
+        {id: '7' , url: '/', title: 'Кеды и кроссовки' },
+        {id: '8' , url: '/', title: 'Мокасины' },
+        {id: '9' , url: '/', title: 'Полусапоги' },
+        {id: '10' , url: '/', title: 'Резиновые сапоги' },
+        {id: '11' , url: '/', title: 'Сабо' },
+        {id: '12' , url: '/', title: 'Сапоги' },
+        {id: '13' , url: '/', title: 'Сникерсы' },
+        {id: '14' , url: '/', title: 'Тапочки' },
+        {id: '15' , url: '/', title: 'Туфли' },
+        {id: '16' , url: '/', title: 'Шлёпанцы и вьетнамки' }
+      ],
+
+      seasontList : [
+        {id: '1' , url: '/', title: 'Зима' },
+        {id: '2' , url: '/', title: 'Весна' },
+        {id: '3' , url: '/', title: 'Лето' },
+        {id: '4' , url: '/', title: 'Осень' }
+      ],
+
+      brandList : [
+        {id: '1' , url: '/', title: 'Albano' },
+        {id: '2' , url: '/', title: 'Ballin' },
+        {id: '3' , url: '/', title: 'Baldinini' },
+        {id: '4' , url: '/', title: 'Damlax' },
+        {id: '5' , url: '/', title: 'Pegia' },
+        {id: '6' , url: '/', title: 'Renzi' },
+        {id: '7' , url: '/', title: 'Все' },
+      ]      
+
+    }
+  }
+  
   render() {
     return (
-      <div className="dropped-menu">
+      <div className={`dropped-menu ${this.props.active}`}>
         <div className="wrapper">
           <div className="dropped-menu__lists dropped-menu__lists_women">
             <h3 className="dropped-menu__list-title">Повод:</h3>
             <ul className="dropped-menu__list">
-              <li className="dropped-menu__item">
-                <a href="#">Офис</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Вечеринка</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Свадьба</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Спорт</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Море</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Дом</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Повседневное</a>
-              </li>
+              {this.state.occasionList.map( (item) => <SubItem key={item.id} item={item} /> )}
             </ul>
           </div>
           <div className="dropped-menu__lists dropped-menu__lists_three-coloumns">
             <h3 className="dropped-menu__list-title">Категории:</h3>
             <ul className="dropped-menu__list">
-              <li className="dropped-menu__item">
-                <a href="#">Балетки</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Босоножки</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Ботильоны</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Ботинки</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Ботфорты</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Галоши</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Кеды и кроссовки</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Мокасины</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Полусапоги</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Резиновые сапоги</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Сабо</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Сапоги</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Сникерсы</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Тапочки</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Туфли</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Шлёпанцы и вьетнамки</a>
-              </li>
+              {this.state.subCatList.map( (item) => <SubItem key={item.id} item={item} /> )}
             </ul>
           </div>
           <div className="dropped-menu__lists">
             <h3 className="dropped-menu__list-title">Сезон:</h3>
             <ul className="dropped-menu__list">
-              <li className="dropped-menu__item">
-                <a href="#">Зима</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Весна</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Лето</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Осень</a>
-              </li>
+              {this.state.seasontList.map( (item) => <SubItem key={item.id} item={item} /> )}
             </ul>
           </div>
           <div className="dropped-menu__lists">
             <h3 className="dropped-menu__list-title">Бренды:</h3>
             <ul className="dropped-menu__list">
-              <li className="dropped-menu__item">
-                <a href="#">Albano</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Ballin</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Baldinini</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Damlax</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Pegia</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Renzi</a>
-              </li>
-              <li className="dropped-menu__item">
-                <a href="#">Все</a>
-              </li>
+              {this.state.brandList.map( (item) => <SubItem key={item.id} item={item} /> )}
             </ul>
           </div>
 
@@ -184,5 +153,6 @@ class DroppedMenu extends React.Component {
 }
  
 
-export default MainMenu;
+export default MainMenu ;
+
 

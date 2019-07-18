@@ -7,7 +7,7 @@ import HiddenPanel from './js/HiddenPanel.js';
 import Phone from './js/Phone.js';
 import Logo from './js/Logo.js';
 import Profile from './js/Profile.js';
-import MainMenu from './js/MainMenu.js';
+import MainMenu  from './js/MainMenu.js';
 import Footer from './js/Footer.js';
 import Catalogue from './js/Catalogue.js';
 import Favorite from './js/Favorite.js';
@@ -25,7 +25,7 @@ class App extends Component {
     this.state = {
       visiblePanel: false,
       visibleProfile: false,
-      visibleBasket: false
+      visibleBasket: false 
 
     }
   }
@@ -75,6 +75,7 @@ class App extends Component {
             <Route path="/catalogue" component={Catalogue}/>
             <Route path="/favorite" component={Favorite}/>
             <Route path="/product" component={ProductCard}/>
+            <Route path="/product/:id" component={ProductCard}/>
             <Route path="/order" component={Order}/>
             <Route path="/orderdone" component={OrderDone}/>
           </Switch>

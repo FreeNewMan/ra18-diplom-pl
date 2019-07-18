@@ -514,7 +514,8 @@ li a:hover {
   top: 14px;
   height: 29px;
   width: 29px;
-  background-image: url(../img/new-deals__product_favorite.png);
+  /*background-image: url(../img/new-deals__product_favorite.png);*/
+  /*background-image: url(../img/new-deals__product_favorite_chosen.png);*/
   background-repeat: no-repeat;
 }
 .new-deals__product_favorite:hover {

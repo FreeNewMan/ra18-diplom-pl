@@ -25,6 +25,10 @@ function DealsHead(props) {
 }
 
 
+const favChoosenImg = '../img/new-deals__product_favorite_chosen.png';
+const favImg = '../img/new-deals__product_favorite.png';
+
+
 class NewDeals extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +37,8 @@ class NewDeals extends React.Component {
       featured: [],
       filteredFeatures: [],
       categories: [],
-      activeinds: [0,1,2]
+      activeinds: [0,1,2],
+      chngfav: false
     }
   }
 
@@ -44,8 +49,8 @@ class NewDeals extends React.Component {
 
     StoreApi.getCategories().then((jsonData) => {
       if (jsonData.status === 'ok') { 
-        this.setState({ categories: jsonData.data });
         activeCat = jsonData.data[1].id;
+        this.setState({ categories: jsonData.data, activeCat: activeCat });
       };
     });     
 
@@ -61,9 +66,8 @@ class NewDeals extends React.Component {
 
 
  updateActive = (value) => {
-  console.log(this.state.featured)
    this.setState({ activeCat: value, 
-                   filteredFeatures: this.state.featured.filter(obj => obj.categoryId == value),
+                   filteredFeatures: this.state.featured.filter(obj => obj.categoryId === value),
                    activeinds: [0,1,2]
                  });
  }
@@ -79,28 +83,42 @@ class NewDeals extends React.Component {
 
 
  goRight = () => {
-   let cnt = this.state.filteredFeatures.length;
-   if (cnt > this.state.activeinds[2]+1) {
-     let arr = this.state.activeinds;
-       arr.shift();
-       arr.push(arr[1]+1);
-     this.setState({ activeinds: arr});  
-   }
+   let arr = this.state.activeinds;
+   let next = arr[2]+1;
+   if (arr[2] === this.state.filteredFeatures.length-1) { next = 0 };
+   arr.shift();
+   arr.push(next);
+   this.setState({ activeinds: arr}); 
  }
  
+ favChoose = (item) => {
+   var localValue = localStorage.getItem(item.id);
+   if (localValue) {
+     localStorage.removeItem(item.id);
+   } else {
+     localStorage.setItem(item.id, item.title); 
+   }
+   this.setState({chngfav : !this.state.chngfav});
+ }
 
 
   render() {
- 
-    let items = this.state.filteredFeatures;
-    console.log(items);
+     let items = this.state.filteredFeatures;
  
     if (items.length > 2) {
  
       let firstImage =items[this.state.activeinds[0]].images[0];
+      let previtem = items[this.state.activeinds[0]]
       let curitem = items[this.state.activeinds[1]]
+      let lastitem = items[this.state.activeinds[2]]
       let activeImage = curitem.images[0];
       let lastImage = items[this.state.activeinds[2]].images[0];
+
+      let curFavimg = favImg;
+      let chkLstorge = localStorage.getItem(curitem.id);
+      if (chkLstorge) { 
+        curFavimg = favChoosenImg 
+      };
 
     return (
     <section className="new-deals wave-bottom">
@@ -110,23 +128,23 @@ class NewDeals extends React.Component {
         <div className="new-deals__arrow new-deals__arrow_left arrow" onClick={this.goLeft}></div>
         
         <div className="new-deals__product new-deals__product_first"  style={{backgroundImage: `url(${firstImage})`}}>
-          <a href="#"></a>
+         <Link to={`/product/${previtem.id}`}></Link>        
         </div>
 
         <div className="new-deals__product new-deals__product_active" style={{backgroundImage: `url(${activeImage})`}}>
-          <a href="catalogue.html"></a>
-          <div className="new-deals__product_favorite"></div>
+          <Link to={`/product/${curitem.id}`}></Link>        
+          <div className="new-deals__product_favorite" style={{backgroundImage: `url(${curFavimg})`}} onClick={() => this.favChoose(curitem)}></div>
         </div>
         
         <div className="new-deals__product new-deals__product_last" style={{backgroundImage: `url(${lastImage})`}}>
-          <a href="#"></a>
-        </div>
+          <Link to={`/product/${lastitem.id}`}></Link>        
+       </div>
         
         <div className="new-deals__arrow new-deals__arrow_right arrow" onClick={this.goRight}></div>
       </div>
       
       <div className="new-deals__product-info">
-        <a href="product-card-desktop.html" className="h3">{curitem.title}</a>
+        <Link to={`/product/${curitem.id}`} className='h3'>{curitem.title}</Link>        
         <p>Производитель:
           <span>{curitem.brand}</span>
         </p>

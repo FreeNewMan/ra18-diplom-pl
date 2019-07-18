@@ -20,6 +20,12 @@ class StoreApi {
       return getData('/featured');
     }  
  
+     /*Получение Новинок */
+    static getProduct (id) {
+      return getData(`/products/${id}`);
+    }  
+
+
 }
 
 export {StoreApi}
