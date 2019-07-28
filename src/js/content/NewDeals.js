@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {StoreApi} from './StoreApi.js';
+import {StoreApi, FavApi} from '../tools/StoreApi.js';
 
 
 function MenuItem(props) {
@@ -36,7 +36,7 @@ class NewDeals extends React.Component {
       activeCat: '',
       featured: [],
       filteredFeatures: [],
-      categories: [],
+      categories: this.props.context.state.categories,
       activeinds: [0,1,2],
       chngfav: false
     }
@@ -45,19 +45,11 @@ class NewDeals extends React.Component {
 
 
   componentDidMount () {
-   let activeCat;
-
-    StoreApi.getCategories().then((jsonData) => {
-      if (jsonData.status === 'ok') { 
-        activeCat = jsonData.data[1].id;
-        this.setState({ categories: jsonData.data, activeCat: activeCat });
-      };
-    });     
-
+    
     StoreApi.getFeatured().then((jsonData) => {
       if (jsonData.status === 'ok') { 
         this.setState({ featured: jsonData.data });
-        this.updateActive(activeCat); 
+        this.updateActive(this.props.context.state.categories[1].id);
       };
     });     
 
@@ -91,13 +83,11 @@ class NewDeals extends React.Component {
    this.setState({ activeinds: arr}); 
  }
  
+
+
+
  favChoose = (item) => {
-   var localValue = localStorage.getItem(item.id);
-   if (localValue) {
-     localStorage.removeItem(item.id);
-   } else {
-     localStorage.setItem(item.id, item.title); 
-   }
+   FavApi.toogleChoose(item);
    this.setState({chngfav : !this.state.chngfav});
  }
 
@@ -115,8 +105,8 @@ class NewDeals extends React.Component {
       let lastImage = items[this.state.activeinds[2]].images[0];
 
       let curFavimg = favImg;
-      let chkLstorge = localStorage.getItem(curitem.id);
-      if (chkLstorge) { 
+      let chkLstorge = localStorage.getItem('favitems') || [] ;
+      if (chkLstorge.includes(curitem.id)) { 
         curFavimg = favChoosenImg 
       };
 

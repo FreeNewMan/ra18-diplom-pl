@@ -30,23 +30,23 @@ class Footer extends React.Component {
           <div className="footer__menus">
             <div className="footer__menu footer__menu_about">О магазине
               <ul>
-                <li><a href="#">BosaNoga</a></li>
-                <li><a href="#">Новости</a></li>
-                <li><a href="#">Пресса</a></li>
+                <li><a href="/">BosaNoga</a></li>
+                <li><a href="/">Новости</a></li>
+                <li><a href="/">Пресса</a></li>
               </ul>
             </div>
             <div className="footer__menu footer__menu_collection">Коллекции
               <ul>
-                <li><a href="#">Обувь</a></li>
-                <li><a href="#">Аксессуары</a></li>
-                <li><a href="#">Для дома</a></li>
+                <li><a href="/">Обувь</a></li>
+                <li><a href="/">Аксессуары</a></li>
+                <li><a href="/">Для дома</a></li>
               </ul>
             </div>
             <div className="footer__menu footer__menu_help">Помощь
               <ul>
-                <li><a href="#">Как купить?</a></li>
-                <li><a href="#">Возврат</a></li>
-                <li><a href="#">Контакты</a></li>
+                <li><a href="/">Как купить?</a></li>
+                <li><a href="/">Возврат</a></li>
+                <li><a href="/">Контакты</a></li>
               </ul>
             </div>
           </div>

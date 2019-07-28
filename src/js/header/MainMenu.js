@@ -15,9 +15,13 @@ const menuItems = [
 
 
 function MenuItem(props) {
+   let categoryId;
+   if (props.category.length > 0) {
+     categoryId = props.category[0].id;
+   }
    return (
-      <li className={`main-menu__item main-menu__item_${props.item.code} ${props.active}`} onClick={() => {props.updateActive(props.item.code)} } >
-         <Link to="/catalogue">{props.item.name}</Link>
+      <li className={`main-menu__item main-menu__item_${props.item.code} ${props.active}`} onClick={() => {props.updateActive(props.item.code, categoryId)} } >
+         <Link to="">{props.item.name}</Link>
       </li>
     );
 }
@@ -26,15 +30,19 @@ function MenuItem(props) {
 class MainMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = { 
       active: this.props.active, 
+      categoryId: '',
       activeDropped: false
     }
   }
 
- updateActive = (value) => {
-   this.setState({ active: value, activeDropped: true})
+ updateActive = (value, categoryId) => {
+   this.setState({ active: value, activeDropped: true, categoryId: categoryId })
+ }
 
+ hideActiveDropped = () => {
+   this.setState({ activeDropped: false})
  }
 
   render() {
@@ -43,11 +51,11 @@ class MainMenu extends React.Component {
       <nav className="main-menu">
         <div className="wrapper">
           <ul className="main-menu__items">
-            {menuItems.map((item) => <MenuItem key={item.code} item={item} updateActive={this.updateActive} active={item.code === this.state.active ? 'main-menu__item_active' : '' }/>)}
+            {menuItems.map((item) => <MenuItem key={item.code} item={item} category={this.props.context.state.categories.filter(function(ele){return ele.title === item.name; })}  updateActive={this.updateActive} active={item.code === this.state.active ? 'main-menu__item_active' : '' }/>)}
           </ul>
         </div>
       </nav>
-      <DroppedMenu active={this.state.activeDropped ? 'dropped-menu_visible' : '' } />
+      <DroppedMenu active={this.state.activeDropped ? 'dropped-menu_visible' : '' } categoryId={this.state.categoryId} hideActiveDropped={this.hideActiveDropped} />
       </div>
     );
   }
@@ -56,8 +64,12 @@ class MainMenu extends React.Component {
 
 function SubItem(props) {
    return (
-      <li className='dropped-menu__item' >
-         <Link to="/catalogue">{props.item.title}</Link>
+      <li className='dropped-menu__item' onClick={() => props.hideActiveDropped()}>
+         <Link to= {{  
+             pathname: '/catalogue',
+             params: props.params
+         }}
+           >{props.item.title}</Link>
       </li>
     );
 }
@@ -118,31 +130,33 @@ class DroppedMenu extends React.Component {
   }
   
   render() {
+    let params = {};
+    if (this.props.categoryId) { params.categoryId=this.props.categoryId };
     return (
       <div className={`dropped-menu ${this.props.active}`}>
         <div className="wrapper">
           <div className="dropped-menu__lists dropped-menu__lists_women">
             <h3 className="dropped-menu__list-title">Повод:</h3>
             <ul className="dropped-menu__list">
-              {this.state.occasionList.map( (item) => <SubItem key={item.id} item={item} /> )}
+              {this.state.occasionList.map( (item) => <SubItem key={item.id} item={item} params={{reason: item.title , ...params}} hideActiveDropped={this.props.hideActiveDropped} /> )}
             </ul>
           </div>
           <div className="dropped-menu__lists dropped-menu__lists_three-coloumns">
             <h3 className="dropped-menu__list-title">Категории:</h3>
             <ul className="dropped-menu__list">
-              {this.state.subCatList.map( (item) => <SubItem key={item.id} item={item} /> )}
+              {this.state.subCatList.map( (item) => <SubItem key={item.id} item={item}  params={{type : item.title , ...params}} hideActiveDropped={this.props.hideActiveDropped} /> )}
             </ul>
           </div>
           <div className="dropped-menu__lists">
             <h3 className="dropped-menu__list-title">Сезон:</h3>
             <ul className="dropped-menu__list">
-              {this.state.seasontList.map( (item) => <SubItem key={item.id} item={item} /> )}
+              {this.state.seasontList.map( (item) => <SubItem key={item.id} item={item} params={{season  : item.title , ...params}} hideActiveDropped={this.props.hideActiveDropped} /> )}
             </ul>
           </div>
           <div className="dropped-menu__lists">
             <h3 className="dropped-menu__list-title">Бренды:</h3>
             <ul className="dropped-menu__list">
-              {this.state.brandList.map( (item) => <SubItem key={item.id} item={item} /> )}
+              {this.state.brandList.map( (item) => <SubItem key={item.id} item={item} params={{brand   : item.title , ...params}} hideActiveDropped={this.props.hideActiveDropped} /> )}
             </ul>
           </div>
 

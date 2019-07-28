@@ -87,9 +87,6 @@ h2.section-name {
   position: relative;
   top: 23px;
   left: 14px;
-  height: 95%;
-  width: 95%; 
-  object-fit: contain;  
 }
 
 .main-screen__favourite-product-pic img:hover {
@@ -437,21 +434,18 @@ li.active {
 }
 
 .favourite-product-slider__item-1 {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  background: url(../img/product-card-pics/product-card__favourite-product-slider-item-1.png) no-repeat;
+  background-position: 29px 0;
 }
 
 .favourite-product-slider__item-2 {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  background: url(../img/product-card-pics/product-card__favourite-product-slider-item-2.png) no-repeat;
+  background-position: 13px 0;
 }
 
 .favourite-product-slider__item-3 {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  background: url(../img/product-card-pics/product-card__favourite-product-slider-item-3.png) no-repeat;
+  background-position: 30px 0;
 }
 
 

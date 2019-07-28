@@ -255,9 +255,6 @@ a.item-list__item-card {
   position: relative;
   top: 16px;
   left: -1px;
-  height: 100%;
-  width: 100%; 
-  object-fit: contain;
 }
 
 .item-pic-2 {
@@ -395,9 +392,7 @@ span.producer {
 }
 
 .product-catalogue .sizes__title {
-  margin-top: 15px;
-  margin-left: 0px;
-  text-align: center;
+  margin-top: 10px;
   font-size: 14px;
   font-weight: bold;
 }

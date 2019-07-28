@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+import '../../css/style-order.css';
 
 class Order extends React.Component {
   render() {
@@ -9,8 +10,8 @@ class Order extends React.Component {
         <div className="site-path">
           <ul className="site-path__items">
             <li className="site-path__item"><a href="index.html">Главная</a></li>
-            <li className="site-path__item"><a href="#">Корзина</a></li>
-            <li className="site-path__item"><a href="#">Оформление заказа</a></li>
+            <li className="site-path__item"><a href="/">Корзина</a></li>
+            <li className="site-path__item"><a href="/">Оформление заказа</a></li>
           </ul>
         </div>
         <section className="order-process">
@@ -21,7 +22,7 @@ class Order extends React.Component {
               <div className="basket-item">
                 <div className="basket-item__pic"><img src="img/catalogue-pics/product-catalogue__item-1.png" alt="product_1"/></div>
                 <div className="basket-item__product">
-                  <div className="basket-item__product-name"><a href="#">Босоножки женские</a></div>
+                  <div className="basket-item__product-name"><a href="/">Босоножки женские</a></div>
                   <div className="basket-item__product-features">
                     <div className="basket-item__size">Размер: <span>37</span></div>
                     <div className="basket-item__producer">Производитель: <span>Albano</span></div>
@@ -37,7 +38,7 @@ class Order extends React.Component {
               <div className="basket-item">
                 <div className="basket-item__pic"><img src="img/catalogue-pics/product-catalogue__item-1.png" alt="product_1"/></div>
                 <div className="basket-item__product">
-                  <div className="basket-item__product-name"><a href="#">Босоножки женские</a></div>
+                  <div className="basket-item__product-name"><a href="/">Босоножки женские</a></div>
                   <div className="basket-item__product-features">
                     <div className="basket-item__size">Размер: <span>37</span></div>
                     <div className="basket-item__producer">Производитель: <span>Albano</span></div>
@@ -54,7 +55,7 @@ class Order extends React.Component {
             <div className="order-basket__summ">Итого:&nbsp<span>12 050 <i className="fa fa-rub" aria-hidden="true"></i></span></div>
           </div>
           <div className="order-process__confirmed">
-            <form action="#">
+            <form action="/">
               <div className="order-process__delivery">
                 <h3 className="h3">кому и куда доставить?</h3>
                 <div className="order-process__delivery-form">

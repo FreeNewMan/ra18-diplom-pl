@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import TopMenu from './js/TopMenu.js';
-import Header from './js/Header.js';
-import HiddenPanel from './js/HiddenPanel.js';
-import Phone from './js/Phone.js';
-import Logo from './js/Logo.js';
-import Profile from './js/Profile.js';
-import MainMenu  from './js/MainMenu.js';
-import Footer from './js/Footer.js';
-import Catalogue from './js/Catalogue.js';
-import Favorite from './js/Favorite.js';
+import TopMenu from './js/header/TopMenu.js';
+import Header from './js/header/Header.js';
+import HiddenPanel from './js/header/HiddenPanel.js';
+import Phone from './js/header/Phone.js';
+import Logo from './js/header/Logo.js';
+import Profile from './js/header/Profile.js';
+import MainMenu  from './js/header/MainMenu.js';
+import Footer from './js/footer/Footer.js';
+import Catalogue from './js/content/Catalogue.js';
+import Favorite from './js/content/Favorite.js';
+import {StoreApi, FavApi} from './js/tools/StoreApi.js';
 
-import HomePage from './js/HomePage.js';
-import ProductCard from './js/ProductCard.js';
-import Order from './js/Order.js';
-import OrderDone from './js/OrderDone.js';
+import HomePage from './js/content/HomePage.js';
+import ProductCard from './js/content/ProductCard.js';
+import Order from './js/content/Order.js';
+import OrderDone from './js/content/OrderDone.js';
+
 
 
 
@@ -25,9 +27,18 @@ class App extends Component {
     this.state = {
       visiblePanel: false,
       visibleProfile: false,
-      visibleBasket: false 
-
+      visibleBasket: false, 
+      categories: []
     }
+  }
+
+
+  componentDidMount () {
+    StoreApi.getCategories().then((jsonData) => {
+      if (jsonData.status === 'ok') { 
+        this.setState({ categories: jsonData.data });
+      };
+    });    
   }
 
   updateVisibleProfile = () => {
@@ -46,7 +57,6 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="container">
           <Header>
             <TopMenu />
             <div className="header-main">
@@ -68,19 +78,20 @@ class App extends Component {
               updateVisibleBasket={this.updateVisibleBasket}
               />
             </div>  
-            <MainMenu />
+             {this.state.categories.length > 0 ? <MainMenu context={this} /> : ''}
           </Header>  
           <Switch>
-            <Route exact path="/" component={HomePage}/>
+            <Route exact path="/" render={(props) => (
+                this.state.categories.length > 0 ? <HomePage context={this} /> : ''
+              )}/>
             <Route path="/catalogue" component={Catalogue}/>
             <Route path="/favorite" component={Favorite}/>
             <Route path="/product" component={ProductCard}/>
-            <Route path="/product/:id" component={ProductCard}/>
+            <Route path="/product/:id?" component={ProductCard}/>
             <Route path="/order" component={Order}/>
             <Route path="/orderdone" component={OrderDone}/>
           </Switch>
           <Footer />
-        </div>  
       </Router>
     );
   }

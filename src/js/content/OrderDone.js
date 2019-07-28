@@ -1,5 +1,6 @@
 import React from 'react';
 
+import '../../css/style-order.css';
 
 class OrderDone extends React.Component {
   render() {
@@ -8,9 +9,9 @@ class OrderDone extends React.Component {
         <div className="site-path">
           <ul className="site-path__items">
             <li className="site-path__item"><a href="index.html">Главная</a></li>
-            <li className="site-path__item"><a href="#">Корзина</a></li>
+            <li className="site-path__item"><a href="/">Корзина</a></li>
             <li className="site-path__item"><a href="order.html">Оформление заказа</a></li>
-            <li className="site-path__item"><a href="#">Заказ принят</a></li>
+            <li className="site-path__item"><a href="/">Заказ принят</a></li>
           </ul>
         </div>
         <section className="order-done">

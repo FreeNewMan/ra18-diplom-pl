@@ -485,7 +485,6 @@ li a:hover {
   border: solid 0.5px rgba(41, 42, 58, 0.25);
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: contain;
 }
 .new-deals__product a {
   display: inline-block;
@@ -496,15 +495,18 @@ li a:hover {
   position: relative;
   width: 383px;
   height: 252px;
-  background-image: url(../img/new-deals__product_active.jpg);
+  background-size: contain;
+  /* background-image: url(../img/new-deals__product_active.jpg);*/
 }
 .new-deals__product_first {
-  background-image: url(../img/new-deals__product_1.jpg);
+  /*background-image: url(../img/new-deals__product_1.jpg);*/
   opacity: 0.6;
+  background-size: contain;
 }
 .new-deals__product_last {
-  background-image: url(../img/new-deals__product_2.jpg);
+/*  background-image: url(../img/new-deals__product_2.jpg);*/
   opacity: 0.6;
+  background-size: contain;
 }
 .new-deals__product_favorite {
   position: absolute;
@@ -512,7 +514,8 @@ li a:hover {
   top: 14px;
   height: 29px;
   width: 29px;
-  background-image: url(../img/new-deals__product_favorite.png);
+  /*background-image: url(../img/new-deals__product_favorite.png);*/
+  /*background-image: url(../img/new-deals__product_favorite_chosen.png);*/
   background-repeat: no-repeat;
 }
 .new-deals__product_favorite:hover {
@@ -802,7 +805,6 @@ li a:hover {
   cursor: pointer;
 }
 .footer__bottom {
-  max-height: 242px;
   min-height: 242px;
   background: #A1B3BF;
 }
@@ -1012,12 +1014,6 @@ li a:hover {
   width: 39px;
   height: 39px;
   background-color: #ffffff;
-}
-
-.product-list__pic img{
-  width: 39px;
-  height: 39px;
-  background-size: cover;
 }
 .product-list__product {
   margin: 0 20px;
